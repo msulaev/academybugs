@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-
-export function step(stepName?: string, p0?: { name: string }) {
+/* eslint-disable */
+export function step(stepName?: string) {
   return function decorator(
     target: Function,
     context: ClassMethodDecoratorContext,
@@ -25,3 +25,4 @@ export function step(stepName?: string, p0?: { name: string }) {
     };
   };
 }
+ 
