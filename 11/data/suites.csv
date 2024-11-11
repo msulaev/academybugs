@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","1570","Change pagination","chromium","Mon Nov 11 14:11:24 GMT 2024","passed","Mon Nov 11 14:11:25 GMT 2024","","bugs.spec.ts","",""
-"","2417","Change currency","chromium","Mon Nov 11 14:11:25 GMT 2024","passed","Mon Nov 11 14:11:28 GMT 2024","","bugs.spec.ts","",""
-"","7508","Change quantity of item","chromium","Mon Nov 11 14:11:30 GMT 2024","passed","Mon Nov 11 14:11:38 GMT 2024","","bugs.spec.ts","",""
-"","2360","Post comment in item","chromium","Mon Nov 11 14:11:38 GMT 2024","passed","Mon Nov 11 14:11:40 GMT 2024","","bugs.spec.ts","",""
-"","2447","Login with incorrect email","chromium","Mon Nov 11 14:11:28 GMT 2024","passed","Mon Nov 11 14:11:30 GMT 2024","","bugs.spec.ts","",""
