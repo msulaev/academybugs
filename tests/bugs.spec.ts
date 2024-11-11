@@ -5,7 +5,9 @@ test('Change pagination', async ({ pm }) => {
   await pm.mainPage.visit();
   await pm.mainPage.shouldBeOpened();
   await pm.mainPage.clickToPagination50();
-  await expect(pm.errorComponent.errorOverlay).toContainText('You found a crash bug, examine the page for');
+  await expect(pm.errorComponent.errorOverlay).toContainText(
+    'You found a crash bug, examine the page for',
+  );
 });
 
 test('Change currency', async ({ pm }) => {
@@ -13,7 +15,9 @@ test('Change currency', async ({ pm }) => {
   await pm.mainPage.shouldBeOpened();
   await pm.mainPage.clickToItem();
   await pm.itemPage.changeCurrency(Currency.GBP);
-  await expect(pm.errorComponent.errorInfo).toContainText('You found a crash bug, examine the page for');
+  await expect(pm.errorComponent.errorInfo).toContainText(
+    'You found a crash bug, examine the page for',
+  );
 });
 
 test('Login with incorrect email', async ({ pm }) => {
@@ -41,7 +45,7 @@ test('Post comment in item', async ({ pm }) => {
   await pm.mainPage.shouldBeOpened();
   await pm.mainPage.clickToItem();
   await pm.itemPage.clickSubmitButton();
-  await expect(pm.errorComponent.errorInfo).toContainText('You found a crash bug, examine the page for');
+  await expect(pm.errorComponent.errorInfo).toContainText(
+    'You found a crash bug, examine the page for',
+  );
 });
-
-
