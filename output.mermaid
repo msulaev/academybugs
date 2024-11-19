@@ -1,0 +1,45 @@
+%%{init: {"themeVariables": {"fontSize": "16px", "nodeBorder": "1px solid #333", "nodeTextColor": "#333", "edgeColor": "#333", "nodeBackground": "#fff", "edgeLabelBackground": "#ffffff"} }}%%
+flowchart TD
+    subgraph "Change pagination"
+        T1("Test: Change pagination")
+        T1("Test: Change pagination") --> F2("fa:fa-cogs mainPage.visit()")
+        F2 --> F3("fa:fa-cogs mainPage.shouldBeOpened()")
+        F3 --> F4("fa:fa-cogs mainPage.clickToPagination50()")
+        F4 --> E5("fa:fa-check Expect: errorOverlay")
+    end
+    subgraph "Change currency"
+        T6("Test: Change currency")
+        T6("Test: Change currency") --> F7("fa:fa-cogs mainPage.visit()")
+        F7 --> F8("fa:fa-cogs mainPage.shouldBeOpened()")
+        F8 --> F9("fa:fa-cogs mainPage.clickToItem()")
+        F9 --> F10("fa:fa-cogs itemPage.changeCurrency()")
+        F10 --> E11("fa:fa-check Expect: errorInfo")
+    end
+    subgraph "Login with incorrect email"
+        T12("Test: Login with incorrect email")
+        T12("Test: Login with incorrect email") --> F13("fa:fa-cogs mainPage.visit()")
+        F13 --> F14("fa:fa-cogs mainPage.shouldBeOpened()")
+        F14 --> F15("fa:fa-cogs mainPage.acceptCookies()")
+        F15 --> F16("fa:fa-cogs mainPage.clickToItem()")
+        F16 --> F17("fa:fa-cogs itemPage.fillEmail(test)")
+        F17 --> F18("fa:fa-cogs itemPage.clickSignButton()")
+        F18 --> E19("fa:fa-check Expect: errorModal")
+    end
+    subgraph "Change quantity of item"
+        T20("Test: Change quantity of item")
+        T20("Test: Change quantity of item") --> F21("fa:fa-cogs mainPage.visit()")
+        F21 --> F22("fa:fa-cogs mainPage.shouldBeOpened()")
+        F22 --> F23("fa:fa-cogs mainPage.acceptCookies()")
+        F23 --> F24("fa:fa-cogs mainPage.clickToItem()")
+        F24 --> F25("fa:fa-cogs itemPage.clickAddToCartButton()")
+        F25 --> F26("fa:fa-cogs cartPage.changeQuantity(3)")
+        F26 --> E27("fa:fa-check Expect: errorModal")
+    end
+    subgraph "Post comment in item"
+        T28("Test: Post comment in item")
+        T28("Test: Post comment in item") --> F29("fa:fa-cogs mainPage.visit()")
+        F29 --> F30("fa:fa-cogs mainPage.shouldBeOpened()")
+        F30 --> F31("fa:fa-cogs mainPage.clickToItem()")
+        F31 --> F32("fa:fa-cogs itemPage.clickSubmitButton()")
+        F32 --> E33("fa:fa-check Expect: errorInfo")
+    end
