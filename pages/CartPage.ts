@@ -1,5 +1,6 @@
 import { step } from '../helpers/allure';
 import { BasePage } from './BasePage';
+import { click, type } from '../helpers/actions';
 
 export class CartPage extends BasePage {
   private readonly cartQuantity = this.page.locator('.ec_quantity');
@@ -11,7 +12,7 @@ export class CartPage extends BasePage {
 
   @step('Change quantity in cart')
   public async changeQuantity(count: number) {
-    await this.type(this.cartQuantity, count.toString());
-    await this.click(this.updateButton);
+    await type(this.cartQuantity, count.toString());
+    await click(this.updateButton);
   }
 }

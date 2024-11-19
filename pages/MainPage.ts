@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { step } from '../helpers/allure';
+import { click } from '../helpers/actions';
 
 export class MainPage extends BasePage {
   private readonly item = this.page.locator('id=ec_product_li_4481370');
@@ -15,17 +16,17 @@ export class MainPage extends BasePage {
 
   @step('Click to pagination 50')
   public async clickToPagination50() {
-    await this.click(this.pagination50);
+    await click(this.pagination50);
   }
 
   @step('Click to item yellow snikers')
   public async clickToItem() {
-    await this.click(this.item);
+    await click(this.item);
     await this.page.waitForURL('store/dnk-yellow-shoes/');
   }
 
   @step('Accept cookies')
   public async acceptCookies() {
-    await this.click(this.acceptCookiesButton);
+    await click(this.acceptCookiesButton);
   }
 }

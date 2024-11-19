@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Currency } from '../types/currency';
 import { step } from '../helpers/allure';
+import { click, type, select } from '../helpers/actions';
 
 export class ItemPage extends BasePage {
   private readonly currency = this.page.locator('id=ec_currency_conversion');
@@ -24,26 +25,26 @@ export class ItemPage extends BasePage {
 
   @step('Change currency in Item page')
   public async changeCurrency(currency: Currency) {
-    await this.select(this.currency, currency);
+    await select(this.currency, currency);
   }
 
   @step('Fill email in Item page')
   public async fillEmail(email: string) {
-    await this.type(this.emailInput, email);
+    await type(this.emailInput, email);
   }
 
   @step('Click sign button in Item page')
   public async clickSignButton() {
-    await this.click(this.signButton, { force: true });
+    await click(this.signButton, { force: true });
   }
 
   @step('Click add to cart button in Item page')
   public async clickAddToCartButton() {
-    await this.click(this.addToCartButton);
+    await click(this.addToCartButton);
   }
 
   @step('Click submit button in Item page')
   public async clickSubmitButton() {
-    await this.click(this.submitButton);
+    await click(this.submitButton);
   }
 }
