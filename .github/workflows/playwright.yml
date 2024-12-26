@@ -80,4 +80,6 @@ jobs:
           elif [ "${{ job.status }}" == "failure" ]; then
           STATUS="Tests failed"
           fi
-          curl -s -X POST https://api.telegram.org/bot7219043015:AAFQKdgpzThlEqdoAxMh06ylpBXFy7n7ngo/sendMessage -d chat_id=-4783026865 -d text="$STATUS"
+          REPORT_URL="${{ env.ALLURE_JOB_RUN_URL }}"
+          MESSAGE="$STATUS. View the report at $REPORT_URL"
+          curl -s -X POST https://api.telegram.org/bot7219043015:AAFQKdgpzThlEqdoAxMh06ylpBXFy7n7ngo/sendMessage -d chat_id=-4783026865 -d text="$MESSAGE"
