@@ -86,6 +86,12 @@ jobs:
           publish_dir: allure-history
           publish_branch: gh-pages
 
+      - name: List Allure results directory
+        if: always()
+        run: |
+            echo "Listing contents of allure-results directory:"
+            ls -R allure-results    
+                  
       - name: Prepare report info
         if: always()
         id: prepare-report-info
