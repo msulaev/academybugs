@@ -91,23 +91,24 @@ jobs:
         run: |
             echo "Listing contents of allure-results directory:"
             ls -R allure-results    
-                  
+
+      - uses: daun/playwright-report-summary@v3
+        id: playwright-report-summary
+        if: always() && job.status != 'cancelled'
+        with:
+          report-file: playwright-report/test_result_json.json            
+
+ 
       - name: Prepare report info
         if: always()
         id: prepare-report-info
         run: |
-            filePath="allure-results/widgets/suites.json"
-            if [ -f "$filePath" ]; then
-              PASSED=$(jq '[.children[] | select(.status == "passed")] | length' $filePath)
-              FAILED=$(jq '[.children[] | select(.status == "failed")] | length' $filePath)
-              SKIPPED=$(jq '[.children[] | select(.status == "skipped")] | length' $filePath)
-              BROKEN=$(jq '[.children[] | select(.status == "broken")] | length' $filePath)
-              TOTAL=$((PASSED + FAILED + SKIPPED + BROKEN))
-              echo "PASSED=$PASSED" >> $GITHUB_ENV
-              echo "FAILED=$FAILED" >> $GITHUB_ENV
-              echo "SKIPPED=$SKIPPED" >> $GITHUB_ENV
-              echo "BROKEN=$BROKEN" >> $GITHUB_ENV
-              echo "TOTAL=$TOTAL" >> $GITHUB_ENV
+          filePath="playwright-report/test_result_json.json"
+          PASSED=$(jq '.stats.expected // 0' $filePath)
+          FAILED=$(jq '.stats.unexpected // 0' $filePath)
+          SKIPPED=$(jq '.stats.skipped // 0' $filePath)
+          FLAKY=$(jq '.stats.flaky // 0' $filePath)
+          TOTAL=$((PASSED + FAILED + SKIPPED + FLAKY))
             else
               echo "Allure results file not found: $filePath"
               exit 1
