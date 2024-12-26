@@ -47,7 +47,6 @@ jobs:
         env: 
             ALLURE_LAUNCH_URL: $ALLURE_LAUNCH_URL
 
-
       - name: Run Playwright tests with Allure
         run: |
           allurectl watch --results allure-results -- npx playwright test
@@ -58,7 +57,6 @@ jobs:
           path: allure-results
           retention-days: 1
       
-
       - name: Get Allure history
         uses: actions/checkout@v3
         if: always()
@@ -86,19 +84,12 @@ jobs:
           publish_dir: allure-history
           publish_branch: gh-pages
 
-      - name: List Allure results directory
-        if: always()
-        run: |
-            echo "Listing contents of allure-results directory:"
-            ls -R allure-results    
-
       - uses: daun/playwright-report-summary@v3
         id: playwright-report-summary
         if: always() && job.status != 'cancelled'
         with:
           report-file: playwright-report/test_result_json.json            
 
- 
       - name: Prepare report info
         if: always()
         id: prepare-report-info
