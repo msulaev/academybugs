@@ -16,11 +16,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Docker image
-        run: docker build -t pw-tests-image .
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-      - name: Run Playwright tests inside Docker container
-        run: docker run --rm -v "${{ github.workspace }}/allure-results:/app/allure-results" pw-tests-image
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+        
+      - name: Install allurectl    
+        uses: allure-framework/setup-allurectl@v1
+        with:
+          allure-endpoint: https://allure.autotests.cloud/
+          allure-token: 011fe067-9a03-49bf-b1ca-c7db4b20bbaf
+          allure-project-id: 4539        
+
+      - name: Run Playwright tests with Allure
+        run: allurectl watch -- npx playwright test          
 
       - uses: actions/upload-artifact@master
         with:
@@ -28,11 +43,6 @@ jobs:
           path: allure-results
           retention-days: 1
       
-      - uses: allure-framework/setup-allurectl@v1
-        with:
-          allure-endpoint: https://allure.autotests.cloud/
-          allure-token: 011fe067-9a03-49bf-b1ca-c7db4b20bbaf
-          allure-project-id: 4539
 
       - name: Get Allure history
         uses: actions/checkout@v3
