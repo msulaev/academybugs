@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","2866","Post comment in item","chromium","Tue Nov 19 12:51:23 GMT 2024","passed","Tue Nov 19 12:51:26 GMT 2024","Academybugs","bugs.spec.ts","",""
-"","3059","Login with incorrect email","chromium","Tue Nov 19 12:51:12 GMT 2024","passed","Tue Nov 19 12:51:15 GMT 2024","Academybugs","bugs.spec.ts","",""
-"","3193","Change currency","chromium","Tue Nov 19 12:51:08 GMT 2024","passed","Tue Nov 19 12:51:12 GMT 2024","Academybugs","bugs.spec.ts","",""
-"","2347","Change pagination","chromium","Tue Nov 19 12:51:06 GMT 2024","passed","Tue Nov 19 12:51:08 GMT 2024","Academybugs","bugs.spec.ts","",""
-"","8596","Change quantity of item","chromium","Tue Nov 19 12:51:15 GMT 2024","passed","Tue Nov 19 12:51:23 GMT 2024","Academybugs","bugs.spec.ts","",""
