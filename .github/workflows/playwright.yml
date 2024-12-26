@@ -95,15 +95,21 @@ jobs:
         id: prepare-report-info
         run: |
           filePath="test-results/test-results.json"
-          PASSED=$(jq '.stats.expected // 0' $filePath)
-          FAILED=$(jq '.stats.unexpected // 0' $filePath)
-          SKIPPED=$(jq '.stats.skipped // 0' $filePath)
-          FLAKY=$(jq '.stats.flaky // 0' $filePath)
-          TOTAL=$((PASSED + FAILED + SKIPPED + FLAKY))
-            else
-              echo "Allure results file not found: $filePath"
-              exit 1
-            fi          
+          if [ -f "$filePath" ]; then
+            PASSED=$(jq '.stats.expected // 0' $filePath)
+            FAILED=$(jq '.stats.unexpected // 0' $filePath)
+            SKIPPED=$(jq '.stats.skipped // 0' $filePath)
+            FLAKY=$(jq '.stats.flaky // 0' $filePath)
+            TOTAL=$((PASSED + FAILED + SKIPPED + FLAKY))
+            echo "PASSED=$PASSED" >> $GITHUB_ENV
+            echo "FAILED=$FAILED" >> $GITHUB_ENV
+            echo "SKIPPED=$SKIPPED" >> $GITHUB_ENV
+            echo "FLAKY=$FLAKY" >> $GITHUB_ENV
+            echo "TOTAL=$TOTAL" >> $GITHUB_ENV
+          else
+            echo "Allure results file not found: $filePath"
+            exit 1
+          fi    
 
 
       - name: Send Telegram notification
@@ -116,5 +122,5 @@ jobs:
           STATUS="Tests failed"
           fi
           REPORT_URL=${{ steps.status.outputs.allure-report-link }}
-          MESSAGE="$STATUS. View the report at $REPORT_URL\n\nTotal: $TOTAL\nPassed: $PASSED\nFailed: $FAILED\nSkipped: $SKIPPED\nBroken: $BROKEN"
+          MESSAGE="$STATUS. View the report at $REPORT_URL\n\nTotal: ${{ env.TOTAL }}\nPassed: ${{ env.PASSED }}\nFailed: ${{ env.FAILED }}\nSkipped: ${{ env.SKIPPED }}\nFlaky: ${{ env.FLAKY }}"
           curl -s -X POST https://api.telegram.org/bot7219043015:AAFQKdgpzThlEqdoAxMh06ylpBXFy7n7ngo/sendMessage -d chat_id=-4783026865 -d text="$MESSAGE"
