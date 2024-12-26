@@ -86,6 +86,27 @@ jobs:
           publish_dir: allure-history
           publish_branch: gh-pages
 
+          - name: Prepare report info
+          if: always()
+          id: prepare-report-info
+          run: |
+            filePath="allure-results/widgets/suites.json"
+            if [ -f "$filePath" ]; then
+              PASSED=$(jq '[.children[] | select(.status == "passed")] | length' $filePath)
+              FAILED=$(jq '[.children[] | select(.status == "failed")] | length' $filePath)
+              SKIPPED=$(jq '[.children[] | select(.status == "skipped")] | length' $filePath)
+              BROKEN=$(jq '[.children[] | select(.status == "broken")] | length' $filePath)
+              TOTAL=$((PASSED + FAILED + SKIPPED + BROKEN))
+              echo "PASSED=$PASSED" >> $GITHUB_ENV
+              echo "FAILED=$FAILED" >> $GITHUB_ENV
+              echo "SKIPPED=$SKIPPED" >> $GITHUB_ENV
+              echo "BROKEN=$BROKEN" >> $GITHUB_ENV
+              echo "TOTAL=$TOTAL" >> $GITHUB_ENV
+            else
+              echo "Allure results file not found: $filePath"
+              exit 1
+            fi          
+
       - name: Send Telegram notification
         if: always()
         run: |
@@ -96,5 +117,5 @@ jobs:
           STATUS="Tests failed"
           fi
           REPORT_URL=${{ steps.status.outputs.allure-report-link }}
-          MESSAGE="$STATUS. View the report at $REPORT_URL"
+          MESSAGE="$STATUS. View the report at $REPORT_URL\n\nTotal: ${{ env.TOTAL }}\nPassed: ${{ env.PASSED }}\nFailed: ${{ env.FAILED }}\nSkipped: ${{ env.SKIPPED }}\nBroken: ${{ env.BROKEN }}"
           curl -s -X POST https://api.telegram.org/bot7219043015:AAFQKdgpzThlEqdoAxMh06ylpBXFy7n7ngo/sendMessage -d chat_id=-4783026865 -d text="$MESSAGE"
