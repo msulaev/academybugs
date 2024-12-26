@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main, master]
 
+env:
+  ALLURE_TOKEN: 011fe067-9a03-49bf-b1ca-c7db4b20bbaf
+  ALLURE_ENDPOINT: https://allure.autotests.cloud/
+  ALLURE_PROJECT_ID: 4539
+  ALLURE_RESULTS: allure-results
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -27,6 +33,12 @@ jobs:
           name: allure-results
           path: allure-results
           retention-days: 1
+      
+      - name: Install allurectl
+        uses: allure-framework/setup-allurectl@v1 
+      
+      - name: Send report to Allure TestOps
+        run: allurectl upload --endpoint $ALLURE_ENDPOINT --project-id $ALLURE_PROJECT_ID --token $ALLURE_TOKEN $ALLURE_RESULTS
 
       - name: Get Allure history
         uses: actions/checkout@v3

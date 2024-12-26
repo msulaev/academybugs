@@ -1,6 +1,8 @@
 import { test } from '../../fixtures/fixtureApi';
 
 test.describe('API tests', () => {
+  test.use({ allureMeta: { epic: 'API', feature: 'Challenges' } });
+
   test('Get /challenges', async ({ api }) => {
     const responce = await api.challenges.get();
     await responce.statusCode.shouldBe(200);
