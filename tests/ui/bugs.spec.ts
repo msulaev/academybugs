@@ -4,7 +4,7 @@ import { Currency } from '../../types/currency';
 test.describe('Academybugs', () => {
   test.use({ allureMeta: { epic: 'Academybugs', feature: 'Bugs' } });
 
-  test('Change pagination', async ({ pm }) => {
+  test('Change pagination @allure.id:35503', async ({ pm }) => {
     await pm.mainPage.visit();
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToPagination50();
@@ -13,7 +13,7 @@ test.describe('Academybugs', () => {
     );
   });
 
-  test('Change currency', async ({ pm }) => {
+  test('Change currency @allure.id:35504', async ({ pm }) => {
     await pm.mainPage.visit();
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToItem();
@@ -23,7 +23,7 @@ test.describe('Academybugs', () => {
     );
   });
 
-  test('Login with incorrect email', async ({ pm }) => {
+  test('Login with incorrect email @allure.id:35505', async ({ pm }) => {
     await pm.mainPage.visit();
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.acceptCookies();
@@ -33,7 +33,7 @@ test.describe('Academybugs', () => {
     await expect(pm.errorComponent.errorModal).toContainText('Awesome');
   });
 
-  test('Change quantity of item', async ({ pm }) => {
+  test('Change quantity of item @allure.id:35506', async ({ pm }) => {
     await pm.mainPage.visit();
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.acceptCookies();
@@ -43,7 +43,7 @@ test.describe('Academybugs', () => {
     await expect(pm.errorComponent.errorModal).toContainText('Awesome');
   });
 
-  test('Post comment in item', async ({ pm }) => {
+  test('Post comment in item @allure.id:35507', async ({ pm }) => {
     await pm.mainPage.visit();
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToItem();
