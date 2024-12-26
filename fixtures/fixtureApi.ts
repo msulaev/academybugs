@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test';
-import { Api } from '../api/api/Api';
+import { Api } from '../api/Api';
 import { epic, feature } from 'allure-js-commons';
 
 type CustomFixtures = {
