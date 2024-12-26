@@ -35,7 +35,10 @@ jobs:
           allure-project-id: 4539        
 
       - name: Run Playwright tests with Allure
-        run: allurectl watch --results allure-results -- npx playwright test          
+        run: |
+          allurectl watch --results allure-results -- npx playwright test
+          export $(allurectl job-run env)
+          echo "ALLURE_JOB_RUN_URL=$ALLURE_JOB_RUN_URL" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@master
         with:
