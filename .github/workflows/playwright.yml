@@ -88,13 +88,13 @@ jobs:
         id: playwright-report-summary
         if: always() && job.status != 'cancelled'
         with:
-          report-file: test-results/test_results.json            
+          report-file: test-results/test-results.json           
 
       - name: Prepare report info
         if: always()
         id: prepare-report-info
         run: |
-          filePath="test-results/test_results.json"
+          filePath="test-results/test-results.json"
           PASSED=$(jq '.stats.expected // 0' $filePath)
           FAILED=$(jq '.stats.unexpected // 0' $filePath)
           SKIPPED=$(jq '.stats.skipped // 0' $filePath)
