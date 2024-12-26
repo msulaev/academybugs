@@ -35,7 +35,7 @@ jobs:
           allure-project-id: 4539        
 
       - name: Run Playwright tests with Allure
-        run: allurectl watch -- npx playwright test          
+        run: allurectl watch --results allure-results -- npx playwright test          
 
       - uses: actions/upload-artifact@master
         with:
