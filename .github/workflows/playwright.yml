@@ -70,3 +70,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-history
           publish_branch: gh-pages
+
+      - name: Send Telegram notification
+        if: always()
+        run: |
+          STATUS="Tests completed"
+          if [ "${{ job.status }}" == "success" ]; then
+          STATUS="Tests passed successfully"
+          elif [ "${{ job.status }}" == "failure" ]; then
+          STATUS="Tests failed"
+          fi
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_API_TOKEN }}/sendMessage -d chat_id=4783026865 -d text="$STATUS"

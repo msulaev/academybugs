@@ -34,16 +34,4 @@ export class Response<Type extends Record<string, unknown> | string> {
       expect(this.body).toContain(expectedSubstring);
     });
   }
-
-  public async shouldHave<Key extends keyof Type>({
-    property,
-    witValue,
-  }: {
-    property: Key;
-    witValue: string;
-  }) {
-    await test.step('Response body should contain property with value', async () => {
-      expect(this.body[String(property)]).toEqual(witValue);
-    });
-  }
 }

@@ -20,6 +20,16 @@ test.describe('API tests', () => {
 
   test('Get /todos/1 @allure.id:35512', async ({ api }) => {
     const responce = await api.todos.getTodosId('1');
+    responce.shouldBe({
+      todos: [
+        {
+          id: 1,
+          title: 'scan paperwork',
+          doneStatus: false,
+          description: '',
+        },
+      ],
+    });
     await responce.statusCode.shouldBe(200);
   });
 
