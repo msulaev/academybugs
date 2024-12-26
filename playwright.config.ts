@@ -39,6 +39,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        screenshot: 'only-on-failure',
         baseURL: process.env.BASE_URL,
       },
       testDir: './tests/ui',
