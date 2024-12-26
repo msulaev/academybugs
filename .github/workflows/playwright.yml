@@ -32,13 +32,19 @@ jobs:
         with:
           allure-endpoint: https://allure.autotests.cloud/
           allure-token: 011fe067-9a03-49bf-b1ca-c7db4b20bbaf
-          allure-project-id: 4539        
+          allure-project-id: 4539
+        
+      - name: get Allur launch  
+        run: |
+          export $(allurectl job-run env)
+          echo "[Allure Report]($ALLURE_LAUNCH_URL)" >> $GITHUB_STEP_SUMMARY
+          echo allure-report-link=$ALLURE_LAUNCH_URL >> $GITHUB_OUTPUT
+          echo allure-launch-id=$ALLURE_LAUNCH_ID >> $GITHUB_OUTPUT
+          printenv | grep ALLURE_ 
 
       - name: Run Playwright tests with Allure
         run: |
           allurectl watch --results allure-results -- npx playwright test
-          export $(allurectl job-run env)
-          echo "ALLURE_JOB_RUN_URL=$ALLURE_JOB_RUN_URL" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@master
         with:
@@ -83,6 +89,6 @@ jobs:
           elif [ "${{ job.status }}" == "failure" ]; then
           STATUS="Tests failed"
           fi
-          REPORT_URL="${{ env.ALLURE_JOB_RUN_URL }}"
+          REPORT_URL="$ALLURE_LAUNCH_URL"
           MESSAGE="$STATUS. View the report at $REPORT_URL"
           curl -s -X POST https://api.telegram.org/bot7219043015:AAFQKdgpzThlEqdoAxMh06ylpBXFy7n7ngo/sendMessage -d chat_id=-4783026865 -d text="$MESSAGE"
