@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-- Introduction
+- [introduction](#introduction)
 - [Project Structure](#project-structure)
-- Architecture
-- Technologies
+- [Architecture](#architecture)
+- [Technologies](#technologies)
 - [Setup and Installation](#setup-and-installation)
 - [Running Tests](#running-tests)
 - [Continuous Integration](#continuous-integration)
@@ -102,11 +102,7 @@ To set up and install the AcademyBugs project, follow these steps:
    ```
 
 3. **Set up environment variables**:
-   Create a
-
-.env
-
-file in the root directory and add the necessary environment variables.
+   Create a .env file in the root directory and add the necessary environment variables.
 
 4. **Install Playwright browsers**:
    ```sh
