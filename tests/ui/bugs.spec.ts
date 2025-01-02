@@ -8,8 +8,8 @@ test.describe('Academybugs', () => {
     await pm.mainPage.visit();
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToPagination50();
-    await expect(pm.errorComponent.errorOverlay).toContainText(
-      'You found a crash bug, examine the page for',
+    await expect(pm.errorComponent.bugPopup).toContainText(
+      'What type of issue is it?',
     );
   });
 
@@ -30,7 +30,9 @@ test.describe('Academybugs', () => {
     await pm.mainPage.clickToItem();
     await pm.itemPage.fillEmail('test');
     await pm.itemPage.clickSignButton();
-    await expect(pm.errorComponent.errorModal).toContainText('Awesome');
+    await expect(pm.errorComponent.bugPopup).toContainText(
+      'What type of issue is it?',
+    );
   });
 
   test('Change quantity of item @allure.id:35506', async ({ pm }) => {
@@ -48,8 +50,8 @@ test.describe('Academybugs', () => {
     await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToItem();
     await pm.itemPage.clickSubmitButton();
-    await expect(pm.errorComponent.errorInfo).toContainText(
-      'You found a crash bug, examine the page for',
+    await expect(pm.errorComponent.bugPopup).toContainText(
+      'What type of issue is it?',
     );
   });
 });
