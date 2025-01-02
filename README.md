@@ -192,32 +192,44 @@ flowchart TD
 
 ### Example UI Test
 
-Here is an example of a UI test from the
-
-bugs.spec.ts
-
-file:
+Here is an example of a UI test from the bugs.spec.ts file:
 
 ```typescript
-test('Login with incorrect email @allure.id:35505', async ({ pm }) => {
-  await pm.mainPage.visit();
-  await pm.mainPage.shouldBeOpened();
-  await pm.mainPage.acceptCookies();
-  await pm.mainPage.clickToItem();
-  await pm.itemPage.fillEmail('test');
-  await pm.itemPage.clickSignButton();
-  await expect(pm.errorComponent.bugPopup).toContainText(
-    'What type of issue is it?',
-  );
-});
+test.describe('Academybugs', () => {
+  test.use({ allureMeta: { epic: 'Academybugs', feature: 'Bugs' } });
 
-test('Change quantity of item @allure.id:35506', async ({ pm }) => {
-  await pm.mainPage.visit();
-  await pm.mainPage.shouldBeOpened();
-  await pm.mainPage.acceptCookies();
-  await pm.mainPage.clickToItem();
-  await pm.itemPage.clickAddToCartButton();
-  await pm.cartPage.changeQuantity(3);
+  test('Change pagination @allure.id:35503', async ({ pm }) => {
+    await pm.mainPage.visit();
+    await pm.mainPage.shouldBeOpened();
+    await pm.mainPage.clickToPagination50();
+    await expect(pm.errorComponent.bugPopup).toContainText(
+      'What type of issue is it?',
+    );
+  });
+});
+```
+
+### Example API Test
+
+Here is an example of a API test from the api.spec.ts file:
+
+```typescript
+test.describe('API tests', () => {
+  test.use({ allureMeta: { epic: 'API', feature: 'Challenges' } });
+  test('Get /todos/1 @allure.id:35512', async ({ api }) => {
+    const responce = await api.todos.getTodosId('1');
+    responce.shouldBe({
+      todos: [
+        {
+          id: 1,
+          title: 'scan paperwork',
+          doneStatus: false,
+          description: '',
+        },
+      ],
+    });
+    await responce.statusCode.shouldBe(200);
+  });
 });
 ```
 
