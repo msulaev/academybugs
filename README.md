@@ -18,13 +18,11 @@ AcademyBugs is a comprehensive project designed to demonstrate the use of modern
 ### Project Structure
 
 - **.github/workflows/**: Contains GitHub Actions workflows for continuous integration.
-- **allure-results/**: Stores the results of test executions in JSON format for Allure reporting.
-- **api/**: Contains API-related code and configurations.
-- **fixtures/**: Contains fixture files for setting up test environments.
-- **helpers/**: Contains helper functions and utilities.
-- **pages/**: Contains page object models for the application under test.
+- **src/api/**: Contains API-related code and configurations.
+- **src/fixtures/**: Contains fixture files for setting up test environments.
+- **src/helpers/**: Contains helper functions and utilities.
+- **src/pages/**: Contains page object models for the application under test.
 - **tests/**: Contains test cases and test suites.
-- **types/**: Contains TypeScript type definitions.
 - **playwright.config.ts**: Configuration file for Playwright.
 - **package.json**: Contains project dependencies and scripts.
 - **Dockerfile**: Docker configuration for containerizing the application.
