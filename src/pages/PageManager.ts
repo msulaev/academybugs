@@ -1,8 +1,5 @@
 import { Page } from '@playwright/test';
-import { CartPage } from './CartPage';
-import { ItemPage } from './ItemPage';
-import { MainPage } from './MainPage';
-import { ErrorComponent } from './ErrorComponent';
+import { CartPage, ItemPage, MainPage, ErrorComponent } from './index';
 
 export class PageManager {
   mainPage: MainPage;

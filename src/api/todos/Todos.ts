@@ -14,4 +14,10 @@ export class Todos extends ApiRoute {
       return this.apiClient.sendRequest('GET', url);
     });
   }
+
+  public async postTodos(body: Record<string, unknown>) {
+    return test.step(`Post /todos`, async () => {
+      return this.apiClient.sendRequest('POST', this.url, { body });
+    });
+  }
 }

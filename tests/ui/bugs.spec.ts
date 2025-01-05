@@ -1,21 +1,18 @@
-import { expect, test } from '../../fixtures/fixture';
-import { Currency } from '../../types/currency';
+import { faker } from '@faker-js/faker';
+import { expect, test } from '../../src/fixtures/fixture';
+import { Currency } from '../../src/pages/currency';
 
 test.describe('Academybugs', () => {
   test.use({ allureMeta: { epic: 'Academybugs', feature: 'Bugs' } });
 
   test('Change pagination @allure.id:35503', async ({ pm }) => {
-    await pm.mainPage.visit();
-    await pm.mainPage.shouldBeOpened();
-    await pm.mainPage.clickToPagination50();
+    await pm.mainPage.clickToPagination('50');
     await expect(pm.errorComponent.bugPopup).toContainText(
       'What type of issue is it?',
     );
   });
 
   test('Change currency @allure.id:35504', async ({ pm }) => {
-    await pm.mainPage.visit();
-    await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToItem();
     await pm.itemPage.changeCurrency(Currency.GBP);
     await expect(pm.errorComponent.errorInfo).toContainText(
@@ -24,11 +21,9 @@ test.describe('Academybugs', () => {
   });
 
   test('Login with incorrect email @allure.id:35505', async ({ pm }) => {
-    await pm.mainPage.visit();
-    await pm.mainPage.shouldBeOpened();
     await pm.mainPage.acceptCookies();
     await pm.mainPage.clickToItem();
-    await pm.itemPage.fillEmail('test');
+    await pm.itemPage.fillEmail(faker.internet.email());
     await pm.itemPage.clickSignButton();
     await expect(pm.errorComponent.bugPopup).toContainText(
       'What type of issue is it?',
@@ -36,8 +31,6 @@ test.describe('Academybugs', () => {
   });
 
   test('Change quantity of item @allure.id:35506', async ({ pm }) => {
-    await pm.mainPage.visit();
-    await pm.mainPage.shouldBeOpened();
     await pm.mainPage.acceptCookies();
     await pm.mainPage.clickToItem();
     await pm.itemPage.clickAddToCartButton();
@@ -46,8 +39,6 @@ test.describe('Academybugs', () => {
   });
 
   test('Post comment in item @allure.id:35507', async ({ pm }) => {
-    await pm.mainPage.visit();
-    await pm.mainPage.shouldBeOpened();
     await pm.mainPage.clickToItem();
     await pm.itemPage.clickSubmitButton();
     await expect(pm.errorComponent.bugPopup).toContainText(

@@ -15,8 +15,12 @@ export class MainPage extends BasePage {
   }
 
   @step('Click to pagination 50')
-  public async clickToPagination50() {
-    await click(this.pagination50);
+  public async clickToPagination(pagination: string) {
+    await click(
+      this.page
+        .locator('.what-we-offer-pagination-link')
+        .filter({ hasText: pagination }),
+    );
   }
 
   @step('Click to item yellow snikers')

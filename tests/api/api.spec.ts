@@ -1,4 +1,5 @@
-import { test } from '../../fixtures/fixtureApi';
+import { faker } from '@faker-js/faker';
+import { test } from '../../src/fixtures/fixtureApi';
 
 test.describe('API tests', () => {
   test.use({ allureMeta: { epic: 'API', feature: 'Challenges' } });
@@ -33,8 +34,18 @@ test.describe('API tests', () => {
     await responce.statusCode.shouldBe(200);
   });
 
-  test('Get /todos/9999 @allure.id:35509', async ({ api }) => {
-    const responce = await api.todos.getTodosId('9999');
-    await responce.statusCode.shouldBe(404);
+  test('Post /todos @allure.id:35509', async ({ api }) => {
+    const body = {
+      title: faker.lorem.words(2),
+      doneStatus: false,
+      description: faker.lorem.words(5),
+    };
+    const responce = await api.todos.postTodos(body);
+    await responce.statusCode.shouldBe(201);
+    await responce.shouldBe({
+      title: body.title,
+      doneStatus: body.doneStatus,
+      description: body.description,
+    });
   });
 });

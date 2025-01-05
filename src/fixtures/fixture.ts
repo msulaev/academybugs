@@ -16,6 +16,8 @@ export const test = base.extend<Fixtures>({
       feature(allureMeta.feature);
     }
     const pm = new PageManager(page);
+    await pm.mainPage.visit();
+    await pm.mainPage.shouldBeOpened();
     await use(pm);
   },
 

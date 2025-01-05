@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { Currency } from '../types/currency';
+import { Currency } from './currency';
 import { step } from '../helpers/allure';
 import { click, type, select } from '../helpers/actions';
 

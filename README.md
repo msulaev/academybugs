@@ -15,33 +15,7 @@
 
 AcademyBugs is a comprehensive project designed to demonstrate the use of modern web testing frameworks and tools. The project utilizes Playwright for end-to-end testing, Allure for reporting, and GitHub Actions for continuous integration. This README provides an overview of the project structure, architecture, and technologies used.
 
-## Project Structure
-
-The project is organized into several directories and files, each serving a specific purpose:
-
-```
-.env
-.eslintrc.json
-.github/
-  workflows/
-.gitignore
-.husky/
-.prettierrc
-api/
-Dockerfile
-eslint.config.mjs
-fixtures/
-helpers/
-marmeid.js
-output.mermaid
-package.json
-pages/
-playwright.config.ts
-tests/
-types/
-```
-
-### Key Directories and Files
+### Project Structure
 
 - **.github/workflows/**: Contains GitHub Actions workflows for continuous integration.
 - **allure-results/**: Stores the results of test executions in JSON format for Allure reporting.
@@ -228,6 +202,18 @@ test.describe('API tests', () => {
   });
 });
 ```
+
+## Allure TestOps Report Example
+
+![image TestOps](./assets/image/test_ops.png)
+
+## Allure Report Example
+
+![image Allure](./assets/image/allure.png)
+
+## Notification Example
+
+![image Allure](./assets/image/tg.png)
 
 ## Conclusion
 
